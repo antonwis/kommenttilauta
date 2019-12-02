@@ -6,7 +6,7 @@
 
         <div v-if="error">
             <h1>{{error}}</h1>
-            <router-link to="/">Go Back</router-link>
+            <router-link to="/search">Go Back</router-link>
         </div>
 
         <div v-if="profileData" class="container">
