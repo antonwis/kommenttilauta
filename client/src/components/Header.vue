@@ -1,31 +1,38 @@
 <template>
+    <header class="header">
+        <h1>Forum</h1>
+        <div id="nav">
+            <router-link to="/">Home</router-link> |
+            <router-link to="/search">POE Search</router-link>
 
-    <header>
-        <img :src="image">
+
+        </div>
     </header>
-    
+
 </template>
 
 <script>
-export default {
-    name: "Header",
-    data() {
-        return {
-            image: require("@/assets/logo.png")
-        };
+
+    export default {
+        name: "Header",
+        components: {
+
+        }
     }
-};
 </script>
 
 <style scoped>
-    img {
-        width: 300px;
-    }
 
-    @media(max-width: 700px) {
-        img {
-            display: block;
-            margin: auto;
-        }
+
+    .header {
+        background: #333;
+        color: #fff;
+        text-align: center;
+        padding: 10px;
+    }
+    .header a {
+        color: #fff;
+        padding-right: 5px;
+        text-decoration: none;
     }
 </style>

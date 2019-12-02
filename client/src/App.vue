@@ -41,13 +41,7 @@ ul {
   list-style: none;
 }
 
-.body-bg-no-image {
-  background: var(--primary-color);
-}
 
-.body-bg-image {
-  background: var(--primary-color) url("./assets/logo.png") no-repeat top center;
-}
 
 .container {
   max-width: 960px;
