@@ -3,6 +3,8 @@ const morgan = require('morgan');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 
+
+
 //Load env cfg
 dotenv.config({ path: "./config.env" });
 
@@ -21,9 +23,14 @@ mongoose.connect(db, { useNewUrlParser: true })
     .then(() => console.log('MongoDB connected'))
     .catch(err => console.log(err));
 
-// Path of Exile profile routes
+// Bodyparser
+app.use(express.urlencoded({ extended: false }));
+
+// Path of Exile api routes
 app.use('/api/profile', require('./routes/profile'));
 
+// Forum routes
+app.use('/api/forum', require('./routes/forum'));
 
 const port = process.env.PORT || 8000;
 

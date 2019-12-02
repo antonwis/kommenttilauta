@@ -2,7 +2,7 @@
     <header class="header">
         <h1>Forum</h1>
         <div id="nav">
-            <router-link to="/">Home</router-link> |
+            <router-link to="/forum">Forum</router-link> |
             <router-link to="/search">POE Search</router-link> |
             <router-link to="/login" v-if="!loggedIn">Login</router-link>
             <router-link to="/login" v-if="loggedIn">Logout</router-link>

@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const fetch = require('node-fetch');
 
-
 // List forum posts
 router.get('/list', (req, res) => {
     Post.find({}).sort({updatedAt: 'descending'}).exec((err, posts) => {
@@ -36,3 +35,5 @@ router.post('/update/:id', (req, res) => {
         return res.send({ message: 'post updated!', post });
       });
     });
+
+module.exports = router;
