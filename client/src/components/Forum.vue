@@ -4,7 +4,7 @@
         <CreatePostModule @createPost="createPost"/>
         <br>
         <div>
-          <noteItem v-for="(post, index) in posts" :post="post" :key="index" @deletePost="deletePost" @updatePost="updatePost"/>
+          <PostItem v-for="(post, index) in posts" :post="post" :key="index" @deletePost="deletePost" @updatePost="updatePost"/>
         </div>
       </div>
     </div>
@@ -20,7 +20,10 @@ export default {
   components: { PostItem, CreatePostModule  },
   data(){
     return {
-      posts: []
+      posts: [{
+        title: "pillu",
+        body: "juden"
+      }]
     }
   },
   methods: {

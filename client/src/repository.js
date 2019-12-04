@@ -1,36 +1,36 @@
 import axios from 'axios';
 const BASE_URL = 'http://localhost:5000';
  
-export function getPosts() {
-        return axios.get(`${BASE_URL}/api/forum/list`)
-                .then(response => response.data);
+export async function getPosts() {
+        const response = await axios.get(`${BASE_URL}/api/forum/list`);
+        return response.data;
 }
  
-export function deletePost(id){
-        return axios.post(`${BASE_URL}/api/forum/delete/${id}`)
-                .then(response => response.data)
-                .catch(err => Promise.reject(err.message));
-}
-export function createPost(data) {
-        return axios.post(`${BASE_URL}/api/forum/create`, 
-        {
-            title: data.title,
-            body: data.body.body,
-            likes: 0,
-            comments: "",
-            date: Date.now
+export async function deletePost(id){
+        try {
+                const response = await axios.post(`${BASE_URL}/api/forum/delete/${id}`);
+                return response.data;
         }
-        )
-        .then(response => {
-                        return response.data
-                })
-                .catch(err => Promise.reject(err.message));
+        catch (err) {
+                return await Promise.reject(err.message);
+        }
+}
+export async function createPost(data) {
+        try {
+                const response = await axios.post(`${BASE_URL}/api/forum/create`, { title: data.title, body: data.body });
+                return response.data;
+        }
+        catch (err) {
+                return await Promise.reject(err.message);
+        }
 }
  
-export function updatePost(data, id) {
-        return axios.post(`${BASE_URL}/api/forum/update/${id}`, { data })
-                .then(response => {
-                        return response.data
-                })
-                .catch(err => Promise.reject(err.message));
+export async function updatePost(data, id) {
+        try {
+                const response = await axios.post(`${BASE_URL}/api/forum/update/${id}`, { data });
+                return response.data;
+        }
+        catch (err) {
+                return await Promise.reject(err.message);
+        }
 }

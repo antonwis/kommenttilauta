@@ -1,27 +1,16 @@
 const mongoose = require('mongoose');
-
-const PostSchema = new mongoose.Schema(
+const Schema = mongoose.Schema;
+const PostSchema = Schema(
     {
         title: {
             type: String,
-            required: true
+            required: false
         },
         body: {
             type: String,
-            required: true
-        },
-        likes: {
-            type: Int16Array,
-            required: true
-        },
-        comments: {
-            type: String,
-            required: true
-        },
-        date: {
-            type: Date,
-            default: Date.now
+            required: false
         }
+        
     },
     {
         timestamps: true

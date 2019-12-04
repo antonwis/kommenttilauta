@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 
 
@@ -25,6 +26,9 @@ mongoose.connect(db, { useNewUrlParser: true })
 
 // Bodyparser
 app.use(express.urlencoded({ extended: false }));
+
+//CORS
+app.use(cors());
 
 // Path of Exile api routes
 app.use('/api/profile', require('./routes/profile'));

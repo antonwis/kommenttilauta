@@ -45,7 +45,8 @@ export default {
       createPost(data)
         .then(data => {
           this.$emit('createPost', data.post);
-          this.title = this.body = '';
+          this.title = '';
+          this.body = '';
           this.toggle();
         })
         .catch(err => console.log(err.message));
