@@ -4,13 +4,12 @@ const PostSchema = Schema(
     {
         title: {
             type: String,
-            required: false
+            required: true
         },
         body: {
             type: String,
-            required: false
+            required: true
         }
-        
     },
     {
         timestamps: true

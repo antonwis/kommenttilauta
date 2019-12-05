@@ -14,6 +14,11 @@
       <span class="has-text-grey-light">last updated: {{ post.updatedAt | moment }}</span><br>
       <UpdatePostModule :post="post" @updatePost="updatePost" :key="post._id"/>
     </div>
+    <div class="comment-section">
+      
+      <p>Comments here</p>
+
+    </div>
   </article>
 </template>
 <script>
