@@ -45,7 +45,7 @@ export async function updatePost(data, id) {
         }
 }
 export function login (info) {
-        axios.post('/auth', { user: info.email, password: info.password })
+        axios.post('/api/auth', { user: info.email, password: info.password })
           .then(request => loginSuccessful(request))
           .catch(error => loginFailed(error))
       }
