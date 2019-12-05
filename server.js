@@ -31,13 +31,16 @@ app.use(express.urlencoded({ extended: false }));
 //CORS
 app.use(cors());
 
-// Path of Exile api routes
-app.use('/api/profile', require('./routes/profile'));
 
-// Forum routes
+// API ROUTES
+app.use('/api/poe', require('./routes/poe'));
 app.use('/api/forum', require('./routes/forum'));
+app.use('/api/profile', require('./routes/profile'));
+app.use('/api/users', require('./routes/users'));
+app.use('/api/auth', require('./routes/auth'));
 
-const port = process.env.PORT || 8000;
+
+const port = process.env.PORT || 5000;
 
 app.listen(port, () => {
     console.log(`Server running in ${process.env.NODE_ENV} mode on port ${port}`);

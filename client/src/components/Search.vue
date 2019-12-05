@@ -29,7 +29,7 @@ export default {
             if (!this.league) {
                 console.log("Enter league name");
             } else {
-                this.$router.push(`/profile/${this.league}`);
+                this.$router.push(`/poe/${this.league}`);
             }
 
         }

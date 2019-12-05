@@ -22,8 +22,8 @@ export default new Router({
             component: Search
         },
         {
-            path: '/profile/:league',
-            name: 'profile',
+            path: '/poe/:league',
+            name: 'poe',
             component: Profile
         },
         {
