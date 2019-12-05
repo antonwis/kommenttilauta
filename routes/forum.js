@@ -122,7 +122,7 @@ router.put('/like/:id', auth, async (req, res) => {
 
     await post.save();
 
-    res.json(post.likes);
+    res.send({likes: post.likes});
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
