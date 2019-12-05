@@ -6,16 +6,33 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 import Header from './components/Header';
 export default {
   name: 'app',
+  computed: {
+    ...mapGetters({ currentUser: 'currentUser' })
+  },
+  created () {
+    this.checkCurrentLogin()
+  },
+  updated () {
+    this.checkCurrentLogin()
+  },
+  methods: {
+    checkCurrentLogin () {
+      if (!this.currentUser && this.$route.path !== '/') {
+        this.$router.push('/?redirect=' + this.$route.path)
+      }
+    }
+  },
   components: {
     Header
   }
 };
 </script>
 
-<style>
+<style scoped>
 :root {
   --primary-color: #f4f4f4;
 }
