@@ -41,7 +41,7 @@ export default {
   },
   methods: {
     create(){
-      let data = { title: this.title, body: this.body }
+      const data = { title: this.title, body: this.body }
       createPost(data)
         .then(data => {
           this.$emit('createPost', data.post);
