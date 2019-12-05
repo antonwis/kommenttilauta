@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const fetch = require('node-fetch');
-const { check, validationResult } = require('express-validator/check');
+const { check, validationResult } = require('express-validator');
 const auth = require('../middleware/auth');
 
 const Post = require('../models/Post');
@@ -122,7 +122,7 @@ router.put('/like/:id', auth, async (req, res) => {
 
     await post.save();
 
-    res.json(post.likes);
+    res.send({likes: post.likes});
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
