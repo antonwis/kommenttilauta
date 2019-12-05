@@ -17,10 +17,14 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // Database config
-const db = require('./config/keys').MongoURI;
+const db = require('./config/default.json').MongoURI;
 
 // Connect to MongoDB
-mongoose.connect(db, { useNewUrlParser: true })
+mongoose.connect(db, {
+    useNewUrlParser: true,
+    useFindAndModify: false,
+    useCreateIndex: true,
+    useUnifiedTopology: true })
     .then(() => console.log('MongoDB connected'))
     .catch(err => console.log(err));
 
