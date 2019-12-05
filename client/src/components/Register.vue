@@ -1,29 +1,26 @@
  <template>
-        <div>
-          <h4>Register</h4>
+        <div class="register-overlay">
+          <div class="register-wrapper border border-light">
+          
           <form @submit.prevent="register">
-            <label for="name">Name</label>
-            <div>
-                <input id="name" type="text" v-model="name" required autofocus>
-            </div>
+            <h2 class="form-register-heading">Register</h2>
+            <div class="alert alert-danger" v-if="error">{{ error }}</div>
+            
             <label for="username" >Username</label>
-            <div>
-                <input id="username" type="text" v-model="email" required>
-            </div>
+            <input id="username" class="form-control" type="text" placeholder="Username" required autofocus>
             <label for="password">Password</label>
-            <div>
-                <input id="password" type="password" v-model="password" required>
-            </div>
+            <input v-model="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
             <label for="password-confirm">Confirm Password</label>
-            <div>
-                <input id="password-confirm" type="password" v-model="password_confirmation" required>
-            </div>
-            <div>
-                <button type="submit">Register</button>
-            </div>
+            <input v-model="password" type="passwordConfirm" id="inputPasswordConfirm" class="form-control" placeholder="Confirm Password" required>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+            <router-link to="/login">Cancel</router-link>
+              
+            
           </form>
+          </div>
         </div>
       </template>
+      
       <script>
       export default {
         data() {
@@ -41,10 +38,7 @@
               email: this.email,
               password: this.password,
             };
-            this.$store
-              .dispatch("register", data)
-              .then(() => this.$router.push("/"))
-              .catch(err => console.log(err));
+            
           }
         }
       };

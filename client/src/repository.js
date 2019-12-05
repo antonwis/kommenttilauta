@@ -1,4 +1,5 @@
 import axios from 'axios';
+import store from './store'
 const BASE_URL = 'http://localhost:5000';
 
 export default axios.create({
@@ -43,3 +44,24 @@ export async function updatePost(data, id) {
                 return await Promise.reject(err.message);
         }
 }
+export function login (info) {
+        axios.post('/auth', { user: info.email, password: info.password })
+          .then(request => loginSuccessful(request))
+          .catch(error => loginFailed(error))
+      }
+export function loginSuccessful (req) {
+        if (!req.data.token) {
+          loginFailed()
+          return
+        }
+        
+        this.error = false
+        localStorage.token = req.data.token
+        store.dispatch('login')
+        this.$router.replace(this.$route.query.redirect || '/')
+      }
+export function loginFailed (error) {
+        console.log(error)
+        store.dispatch('logout')
+        delete localStorage.token
+      }
