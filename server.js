@@ -3,7 +3,7 @@ const morgan = require('morgan');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const cors = require('cors');
-
+const bodyParser = require('body-parser');
 
 
 //Load env cfg
@@ -25,6 +25,7 @@ mongoose.connect(db, { useNewUrlParser: true })
     .catch(err => console.log(err));
 
 // Bodyparser
+app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: false }));
 
 //CORS

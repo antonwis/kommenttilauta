@@ -20,10 +20,7 @@ export default {
   components: { PostItem, CreatePostModule  },
   data(){
     return {
-      posts: [{
-        title: "pillu",
-        body: "juden"
-      }]
+      posts: []
     }
   },
   methods: {

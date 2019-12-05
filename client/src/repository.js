@@ -24,8 +24,9 @@ export async function deletePost(id){
         }
 }
 export async function createPost(data) {
+        const object = { title: data.title, body: data.body };
         try {
-                const response = await axios.post(`${BASE_URL}/api/forum/create`, { title: data.title, body: data.body });
+                const response = await axios.post(`${BASE_URL}/api/forum/create/`, object);
                 return response.data;
         }
         catch (err) {
