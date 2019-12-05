@@ -4,11 +4,15 @@
         <form v-on:submit.prevent="onSubmit">
             <div class="form-group">
                 <label for="league">League</label>
-                <input type="text" name="text" v-model="league" id="league" placeholder="Search for a league eg. Blight" />
+                <input type="textarea" name="text" v-model="league" id="league" placeholder="Search for a league eg. Blight" />
             </div>
             <div class="form-group">
                 <input type="submit" value="Submit" class="btn" />
             </div>
+             <div class="form-group">
+            <router-link to="/leagues">
+            <input type="submit" value="View all leagues" class="btn" /></router-link>
+             </div>
         </form>
     </section>
 </template>

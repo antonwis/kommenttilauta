@@ -18,7 +18,7 @@ router.get('/list', async (req, res) => {
             });
         }
 
-        res.json(data);
+        res.send({data});
             
     } catch (err) {
     console.error(err);

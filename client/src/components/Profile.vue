@@ -20,6 +20,7 @@
 
 <script>
 import axios from "axios";
+import { getLeagues } from '../poeapi';
 export default {
     name: "Profile",
     data() {
@@ -34,12 +35,10 @@ export default {
     },
     async created() {
         this.loading = true;
-
         try {
             const res = await axios.get(
                 `/api/poe/${this.$route.params.league}`
             );
-
             this.profileData = res.data;
             console.log(this.profileData);
             this.loading = false;
@@ -47,7 +46,6 @@ export default {
             this.loading = false;
             this.error = err.response.data.message;
         }
-
     }
 }
 </script>
