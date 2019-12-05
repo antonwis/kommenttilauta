@@ -17,7 +17,7 @@ export async function getPosts() {
  
 export async function deletePost(id){
         try {
-                const response = await axios.post(`${BASE_URL}/api/forum/delete/${id}`);
+                const response = await axios.delete(`${BASE_URL}/api/forum/${id}`);
                 return response.data;
         }
         catch (err) {

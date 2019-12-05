@@ -23,7 +23,7 @@
       </div>
       <button @click="toggle" class="modal-close is-large" aria-label="close"></button>
     </div>
-    <button @click="toggle" class="button is-primary is-pulled-right">Create Note</button>
+    <button @click="toggle" class="button is-primary is-pulled-right">Create New Post</button>
     <br>
   </div>
 </template>

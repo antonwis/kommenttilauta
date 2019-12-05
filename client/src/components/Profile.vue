@@ -37,7 +37,7 @@ export default {
 
         try {
             const res = await axios.get(
-                `/api/profile/${this.$route.params.league}`
+                `/api/poe/${this.$route.params.league}`
             );
 
             this.profileData = res.data;
