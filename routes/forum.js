@@ -20,7 +20,7 @@ router.get('/list', async (req, res) => {
 });
 
 // GET post by id
-router.get('/:id', auth, async (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
 
