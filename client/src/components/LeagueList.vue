@@ -28,7 +28,7 @@ export default {
         this.loading = true;
         try {
             const res = await axios.get(
-                `/api/poe/list`
+                `/api/poe/leagues/list`
             );
             this.leagueData = res.data.data;
             console.log(this.leagueData);

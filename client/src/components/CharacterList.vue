@@ -1,32 +1,24 @@
 <template>
-    <section>
-        <div v-if="loading">
-            <h3>Loading...</h3>
+    <div class="container">
+      <div v-if="characterList">
+        <div>
+          <CharacterListItem v-for="(character, index) in characterList" :character="character" :key="index"/>
         </div>
-
-        <div v-if="error">
-            <h1>{{error}}</h1>
-            <router-link to="/search">Go Back</router-link>
-        </div>
-
-        <div v-if="profileData" class="container">
-            
-            <h3>{{profileData.id}}</h3>
-            <p>{{profileData.description}}</p>
-
-        </div>
-    </section>
+      </div>
+    </div>
 </template>
 
 <script>
 import axios from "axios";
+import CharacterListItem from "./CharacterListItem.vue";
 export default {
-    name: "Profile",
+    name: "CharacterList",
+    components: {CharacterListItem},
     data() {
         return {
             loading: false,
             error: null,
-            profileData: null
+            characterList: []
         };
     },
     beforeCreate() {
@@ -36,10 +28,10 @@ export default {
         this.loading = true;
         try {
             const res = await axios.get(
-                `/api/poe/leagues/${this.$route.params.league}`
+                `/api/poe/account/${this.$route.params.accountName}`
             );
-            this.profileData = res.data;
-            console.log(this.profileData);
+            this.characterList = res.data;
+            console.log(this.characterList);
             this.loading = false;
         } catch (err) {
             this.loading = false;
