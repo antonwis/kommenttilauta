@@ -4,7 +4,7 @@ const fetch = require('node-fetch');
 
 
 // Get all ongoing leagues
-router.get('/list', async (req, res) => {
+router.get('/leagues/list', async (req, res) => {
 
     try {
         
@@ -29,7 +29,7 @@ router.get('/list', async (req, res) => {
 });
 
 // Get league by name
-router.get('/:league', async (req, res) => {
+router.get('/leagues/:league', async (req, res) => {
 
     try {
         

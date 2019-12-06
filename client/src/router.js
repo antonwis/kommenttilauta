@@ -6,6 +6,7 @@ import Forum from "./components/Forum.vue";
 import Login from "./components/Login.vue";
 import Register from "./components/Register.vue";
 import LeagueList from "./components/LeagueList.vue";
+import CharacterList from "./components/CharacterList.vue";
 
 Vue.use(Router);
 
@@ -23,14 +24,19 @@ export default new Router({
             component: Search
         },
         {
-            path: '/poe/:league',
+            path: '/poe/leagues/:league',
             name: 'poe',
             component: Profile
         },
         {
-            path: '/leagues',
+            path: '/poe/leagues/',
             name: 'leaguelist',
             component: LeagueList
+        },
+        {
+            path: '/poe/account/:accountName',
+            name: 'characterlist',
+            component: CharacterList
         },
         {
             path: "/login",
