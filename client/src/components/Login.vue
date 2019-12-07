@@ -45,7 +45,7 @@ export default {
     },
     log(){
       const info = {email: this.email, password: this.password}
-      login(info)
+      login(info);
     }
   },
  

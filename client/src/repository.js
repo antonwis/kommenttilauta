@@ -1,5 +1,6 @@
 import axios from 'axios';
 import store from './store'
+import router from './router'
 const BASE_URL = 'http://localhost:5000';
 
 export default axios.create({
@@ -67,26 +68,33 @@ export async function updatePost(data, id) {
         }
 }
 export function login (info) {
-        axios.post('/api/auth', { user: info.email, password: info.password })
-          .then(request => loginSuccessful(request))
+        axios.post(`${BASE_URL}/api/auth`, { email: info.email, password: info.password })
+          .then(response => loginSuccessful(response))
           .catch(error => loginFailed(error))
       }
-export function loginSuccessful (req) {
-        if (!req.data.token) {
+export function loginSuccessful (res) {
+        console.log(res.data);
+        if (!res.data.token) {
           loginFailed()
           return
         }
-        
-        this.error = false
-        localStorage.token = req.data.token
+
+        localStorage.setItem("token", res.data.token);
         store.dispatch('login')
-        this.$router.replace(this.$route.query.redirect || '/')
+        router.push('/');
       }
 export function loginFailed (error) {
         console.log(error)
         store.dispatch('logout')
         delete localStorage.token
+        
       }
+export function register(info){
+        axios.post(`${BASE_URL}/api/users`, {name: info.name, email: info.email, password: info.password})
+                .then(request => loginSuccessful(request))
+                .catch(error => loginFailed(error))
+        
+}
 
 // Like a post
 export async function addLike(id) {

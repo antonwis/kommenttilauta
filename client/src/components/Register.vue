@@ -2,16 +2,17 @@
         <div class="register-overlay">
           <div class="register-wrapper border border-light">
           
-          <form @submit.prevent="register">
+          <form @submit.prevent="reg">
             <h2 class="form-register-heading">Register</h2>
             <div class="alert alert-danger" v-if="error">{{ error }}</div>
-            
-            <label for="username" >Username</label>
-            <input id="username" class="form-control" type="text" placeholder="Username" required autofocus>
+            <label for="name">Name</label>
+            <input v-model="name" id="name" class="form-control" type="text" placeholder="Name" required autofocus>
+            <label for="email" >Email</label>
+            <input v-model="email" id="email" class="form-control" type="text" placeholder="Email" required autofocus>
             <label for="password">Password</label>
             <input v-model="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
             <label for="password-confirm">Confirm Password</label>
-            <input v-model="password" type="passwordConfirm" id="inputPasswordConfirm" class="form-control" placeholder="Confirm Password" required>
+            <input v-model="password" type="password" id="inputPasswordConfirm" class="form-control" placeholder="Confirm Password" required>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
             <router-link to="/login">Cancel</router-link>
               
@@ -22,6 +23,9 @@
       </template>
       
       <script>
+      import { mapGetters } from 'vuex'
+      import {register} from '../repository'
+      import repository from '../repository';
       export default {
         data() {
           return {
@@ -30,15 +34,30 @@
             password: "",
             password_confirmation: "",
           };
+        }, 
+        computed: {
+           ...mapGetters({ currentUser: 'currentUser' })
+         },
+        created () {
+          this.checkCurrentLogin()
+        },
+        updated () {
+            this.checkCurrentLogin()
         },
         methods: {
-          register: function() {
+          checkCurrentLogin () {
+            if (this.currentUser) {
+              return ""
+            }
+         },
+          reg: function() {
             let data = {
               name: this.name,
               email: this.email,
               password: this.password,
+              
             };
-            
+            register(data);
           }
         }
       };
