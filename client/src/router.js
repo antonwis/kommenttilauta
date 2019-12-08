@@ -7,6 +7,7 @@ import Login from "./components/Login.vue";
 import Register from "./components/Register.vue";
 import LeagueList from "./components/LeagueList.vue";
 import CharacterList from "./components/CharacterList.vue";
+import CharacterView from "./components/CharacterView.vue";
 
 Vue.use(Router);
 
@@ -37,6 +38,11 @@ export default new Router({
             path: '/poe/account/:accountName',
             name: 'characterlist',
             component: CharacterList
+        },
+        {
+            path: '/poe/account/:accountName/:charName',
+            name: 'characterview',
+            component: CharacterView
         },
         {
             path: "/login",
