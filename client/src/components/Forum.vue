@@ -4,7 +4,7 @@
         <CreatePostModule @createPost="createPost"/>
         <br>
         <div>
-          <PostItem v-for="(post, index) in posts" :post="post" :key="index" @deletePost="deletePost" @updatePost="updatePost"/>
+          <PostItem v-for="(post, index) in posts" :post="post" :key="index" @deletePost="deletePost" @updatePost="updatePost" @addComment="addComment"/>
         </div>
       </div>
     </div>
@@ -35,6 +35,9 @@ export default {
     createPost(post){
         this.posts = [post, ...this.posts];
     },
+    addComment(comment) {
+      this.posts.comments = [comment, ...this.posts.comments];
+    }
   },
   mounted() {
     getPosts()
