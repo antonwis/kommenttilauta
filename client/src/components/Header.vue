@@ -4,8 +4,8 @@
         <div id="nav">
             <router-link to="/">Forum</router-link> |
             <router-link to="/search">POE Search</router-link> |
-            <router-link to="/login">Login</router-link>
-            
+            <router-link v-if="!isLoggedIn" to="/login">Login</router-link>
+            <router-link v-if="isLoggedIn" to="/" @click.native="logOut">Logout</router-link>
 
         </div>
     </header>
@@ -13,12 +13,28 @@
 </template>
 
 <script>
-
+import {mapGetters} from 'vuex'
+import store from '../store/auth'
+import {logout} from '../repository'
     export default {
         name: "Header",
         components: {
 
         },
+        computed: {
+            ...mapGetters([
+            'isLoggedIn'
+            
+            ])
+        },
+        methods: {
+            logOut(){
+                logout()
+            }
+        
+        }
+        
+        
         
     }
 </script>

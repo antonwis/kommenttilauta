@@ -11,7 +11,7 @@ import Header from './components/Header';
 export default {
   name: 'app',
   computed: {
-    ...mapGetters({ currentUser: 'currentUser' })
+    
   },
   created () {
     this.checkCurrentLogin()
@@ -21,9 +21,7 @@ export default {
   },
   methods: {
     checkCurrentLogin () {
-      if (!this.currentUser && this.$route.path !== '/') {
-        return ""
-      }
+      
     }
   },
   components: {

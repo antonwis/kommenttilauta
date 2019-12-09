@@ -10,13 +10,10 @@ export default class User {
     }
   }
 
-  constructor ({ user_id, admin, email }) {
+  constructor ({ user_id, email }) {
     this.id = user_id 
-    this.admin = admin
     this.email = email
   }
 
-  get isAdmin () {
-    return this.admin
-  }
+  
 }
