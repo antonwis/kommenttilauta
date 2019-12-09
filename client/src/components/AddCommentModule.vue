@@ -4,46 +4,50 @@
       <div class="modal-background"></div>
       <div class="modal-card">
         <header class="modal-card-head">
-          Update Post
+          Add a comment
         </header>
         <section class="modal-card-body">
           <div class="field">
             <div class="control">
-              <input v-model="title" class="input" type="text" placeholder="title">
+              <input v-model="name" class="input" type="text" placeholder="Enter a name">
             </div>
           </div>
           <div class="field">
             <div class="control">
-              <textarea v-model="body" class="textarea"  placeholder="enter content"></textarea>
+              <textarea v-model="text" class="textarea"  placeholder="Type your comment">
+                </textarea>
             </div>
           </div>
-          <button @click="update" class="button is-primary is-pulled-right">Post</button>
+          <button @click="create" class="button is-primary is-pulled-right">Submit</button>
         </section>
       </div>
       <button @click="toggle" class="modal-close is-large" aria-label="close"></button>
     </div>
-    <button @click="toggle" class="button is-small is-pulled-right">Edit</button>
+    <button @click="toggle" class="button is-primary is-pulled-right">Add a comment</button>
+    <br>
   </div>
 </template>
  
 <script>
-import { updatePost }  from '../repository'
+import { addComment }  from '../repository'
 export default {
-  name: 'UpdatePostModule',
+  name: 'AddCommentModule',
   data(){
     return {
-      title: this.post.title,
-      body: this.post.body,
+      text: '',
+      name: '',
       isActive: false
     }
   },
-  props: ['post'],
+  props: [ 'post' ],
   methods: {
-    update(){
-      let data = { title: this.title, body: this.body }
-      updatePost(data, this.post._id)
+    create(){
+      const data = { name: this.name, text: this.text };
+      addComment(this.post._id, data)
         .then(data => {
-          this.$emit('updatePost', data.post);
+          this.$emit('addComment', data.comment);
+          this.name = '';
+          this.text = '';
           this.toggle();
         })
         .catch(err => console.log(err.message));

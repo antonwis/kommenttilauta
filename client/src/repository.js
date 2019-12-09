@@ -122,18 +122,9 @@ export async function removeLike(id) {
 
 // Add a comment to a post
 export async function addComment(id, data) {
-        const cfg = {
-                headers: {
-                        'Content-Type': 'application/json'
-                }
-        };
+        
         try {
-                const response = await axios.post(
-                        `${BASE_URL}/api/forum/comment/${id}`,
-                        data,
-                        cfg
-                );
-
+                const response = await axios.post(`${BASE_URL}/api/forum/comment/${id}`, data);
                 return response.data;
 
         } catch (err) {

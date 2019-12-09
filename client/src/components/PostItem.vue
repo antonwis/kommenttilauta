@@ -15,21 +15,29 @@
       <UpdatePostModule :post="post" @updatePost="updatePost" :key="post._id"/>
     </div>
     <div class="comment-section">
-      
-      <p>Comments here</p>
-
+      <div v-for="(comment, index) in comments" :comment="comment" :key="index">
+        <h6 v-if="comment.name">{{ comment.name }}</h6>
+        <p v-if="comment.text">{{ comment.text }}</p>
+      </div>
+      <AddCommentModule :post="post" @addComment="addComment" :key="post._id"/>
     </div>
   </article>
 </template>
 <script>
-  import { deletePost } from '../repository'
+  import { deletePost, addComment } from '../repository'
   import UpdatePostModule from './UpdatePostModule'
+  import AddCommentModule from './AddCommentModule'
   import Moment from 'moment'
  
   export default {
     name: 'PostItem',
     props: [ 'post' ],
-    components: { UpdatePostModule },
+    components: { UpdatePostModule, AddCommentModule },
+    data(){
+      return {
+        comments: []
+      }
+    },
     methods: {
       deletePost(e){
         e.preventDefault();
@@ -39,12 +47,19 @@
       },
       updatePost(post){
         this.$emit('updatePost', post)
+      },
+      addComment(comment) {
+        this.comments.concat(comment);
+        location.reload();
       }
     },
     filters: {
       moment(date) {
         return Moment(date).format('MMMM Do YYYY, h:mm:ss a');
       }
+    },
+    mounted() {
+    this.comments = this.post.comments;
     }
   }
 </script>

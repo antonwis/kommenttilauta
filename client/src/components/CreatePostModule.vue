@@ -4,7 +4,7 @@
       <div class="modal-background"></div>
       <div class="modal-card">
         <header class="modal-card-head">
-          Add Note
+          Create a new post
         </header>
         <section class="modal-card-body">
           <div class="field">
