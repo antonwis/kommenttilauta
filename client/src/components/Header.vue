@@ -6,7 +6,7 @@
             <router-link to="/search">POE Search</router-link> |
             <router-link v-if="!isLoggedIn" to="/login">Login</router-link>
             <router-link v-if="isLoggedIn" to="/" @click.native="logOut">Logout</router-link>
-
+            <h2 v-if="isLoggedIn">{{ user }}</h2>
         </div>
     </header>
 
@@ -23,14 +23,16 @@ import {logout} from '../repository'
         },
         computed: {
             ...mapGetters([
-            'isLoggedIn'
+            'isLoggedIn',
+            'user'
             
             ])
         },
         methods: {
             logOut(){
                 logout()
-            }
+            },
+            
         
         }
         

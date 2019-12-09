@@ -82,14 +82,14 @@ export function login (info) {
 }
 export function loginSuccessful (res) {
         console.log(res.data);
-        if (!res.data.token) {
+        if (!res.data.user.token) {
           loginFailed()
           return
         }
 
-        localStorage.setItem("token", res.data.token,"user",res.data.user);
+        localStorage.setItem("token", res.data.user.token);
         
-        store.commit('auth_success',res.data.token)
+        store.commit('auth_success',res.data.user)
         router.push('/');
       }
 export function loginFailed (error) {
