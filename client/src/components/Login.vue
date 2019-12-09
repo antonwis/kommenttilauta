@@ -29,7 +29,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({ currentUser: 'currentUser' })
+    
   },
   created () {
     this.checkCurrentLogin()
@@ -39,9 +39,7 @@ export default {
   },
   methods: {
     checkCurrentLogin () {
-      if (this.currentUser) {
-        return ""
-      }
+      
     },
     log(){
       const info = {email: this.email, password: this.password}

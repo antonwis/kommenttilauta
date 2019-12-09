@@ -1,38 +1,37 @@
-import User from '@/models/User'
-import * as MutationTypes from './mutation-types'
+import Vue from 'vue'
+import Vuex from 'vuex'
 
-const state = {
-  user: User.from(localStorage.token)
-}
 
-const mutations = {
-  [MutationTypes.LOGIN] (state) {
-    state.user = User.from(localStorage.token)
+Vue.use(Vuex)
+
+export default new Vuex.Store({
+  state: {
+    status: '',
+    token: localStorage.getItem('token') || '',
+    user: {}
   },
-  [MutationTypes.LOGOUT] (state) {
-    state.user = null
-  }
-}
-
-const getters = {
-  currentUser (state) {
-    return state.user
-  }
-}
-
-const actions = {
-  login ({ commit }) {
-    commit(MutationTypes.LOGIN)
+  mutations: {
+    auth_request(state) {
+      state.status = 'loading'
+    },
+    auth_success(state, token, user) {
+      state.status = 'success'
+      state.token = token
+      state.user = user
+    },
+    auth_error(state) {
+      state.status = 'error'
+    },
+    logout(state) {
+     
+      state.status = ''
+      state.token = ''
+    }
   },
+  getters: {
+    isLoggedIn: state => !!state.token,
+    authStatus: state => state.status
 
-  logout ({ commit }) {
-    commit(MutationTypes.LOGOUT)
   }
-}
-
-export default {
-  state,
-  mutations,
-  getters,
-  actions
-}
+  
+})

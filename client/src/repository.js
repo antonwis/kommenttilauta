@@ -1,5 +1,5 @@
 import axios from 'axios';
-import store from './store'
+import store from './store/auth'
 import router from './router'
 const BASE_URL = 'http://localhost:5000';
 
@@ -72,6 +72,14 @@ export function login (info) {
           .then(response => loginSuccessful(response))
           .catch(error => loginFailed(error))
       }
+ export function logout(){
+        return new Promise((resolve, reject) => {
+                  store.commit('logout')
+                  localStorage.removeItem('token')
+                  
+                  resolve()
+        })
+}
 export function loginSuccessful (res) {
         console.log(res.data);
         if (!res.data.token) {
@@ -79,14 +87,15 @@ export function loginSuccessful (res) {
           return
         }
 
-        localStorage.setItem("token", res.data.token);
-        store.dispatch('login')
+        localStorage.setItem("token", res.data.token,"user",res.data.user);
+        
+        store.commit('auth_success',res.data.token)
         router.push('/');
       }
 export function loginFailed (error) {
-        console.log(error)
-        store.dispatch('logout')
-        delete localStorage.token
+        store.commit('auth_error')
+	localStorage.removeItem('token')
+	console.log(error)
         
       }
 export function register(info){

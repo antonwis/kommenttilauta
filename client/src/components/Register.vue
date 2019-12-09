@@ -36,7 +36,7 @@
           };
         }, 
         computed: {
-           ...mapGetters({ currentUser: 'currentUser' })
+           
          },
         created () {
           this.checkCurrentLogin()
@@ -46,9 +46,7 @@
         },
         methods: {
           checkCurrentLogin () {
-            if (this.currentUser) {
-              return ""
-            }
+            
          },
           reg: function() {
             let data = {
