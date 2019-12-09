@@ -3,13 +3,8 @@ import store from './store/auth'
 import router from './router'
 const BASE_URL = 'http://localhost:5000';
 
-export default axios.create({
-        baseURL: BASE_URL,
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + localStorage.token
-        }
-      })
+axios.defaults.headers.common['Authorization'] = localStorage.token;
+
 
 
 // Get all posts
