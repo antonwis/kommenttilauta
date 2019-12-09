@@ -17,7 +17,7 @@ export default new Vuex.Store({
     auth_success(state, user) {
       state.status = 'success'
       state.token = user.token
-      state.user = user.name
+      state.user = user
       console.log(user)
     },
     auth_error(state) {
@@ -32,7 +32,7 @@ export default new Vuex.Store({
   getters: {
     isLoggedIn: state => !!state.token,
     authStatus: state => state.status,
-    user: state => state.user
+    
   }
   
 })

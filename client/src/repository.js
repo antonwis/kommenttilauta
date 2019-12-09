@@ -3,13 +3,7 @@ import store from './store/auth'
 import router from './router'
 const BASE_URL = 'http://localhost:5000';
 
-export default axios.create({
-        baseURL: BASE_URL,
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + localStorage.token
-        }
-      })
+
 
 
 // Get all posts
@@ -49,7 +43,11 @@ export async function deletePost(id){
 export async function createPost(data) {
         const object = { title: data.title, body: data.body };
         try {
-                const response = await axios.post(`${BASE_URL}/api/forum/create/`, object);
+                const response = await axios.post(`${BASE_URL}/api/forum/create/`, object,{
+                        headers: {
+                                authToken: localStorage.token
+                        }
+                });
                 return response.data;
         }
         catch (err) {
@@ -76,7 +74,7 @@ export function login (info) {
         return new Promise((resolve, reject) => {
                   store.commit('logout')
                   localStorage.removeItem('token')
-                  
+                  localStorage.removeItem('user')
                   resolve()
         })
 }
@@ -88,7 +86,7 @@ export function loginSuccessful (res) {
         }
 
         localStorage.setItem("token", res.data.user.token);
-        
+        localStorage.setItem("user",res.data.user.name)
         store.commit('auth_success',res.data.user)
         router.push('/');
       }

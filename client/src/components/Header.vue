@@ -18,13 +18,15 @@ import store from '../store/auth'
 import {logout} from '../repository'
     export default {
         name: "Header",
-        components: {
-
+        data(){
+            return{
+                user: localStorage.getItem('user')
+            } 
         },
         computed: {
             ...mapGetters([
             'isLoggedIn',
-            'user'
+            
             
             ])
         },
@@ -32,6 +34,8 @@ import {logout} from '../repository'
             logOut(){
                 logout()
             },
+            
+                
             
         
         }
