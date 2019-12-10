@@ -31,7 +31,11 @@ export async function getPost(id) {
 // Delete post by id
 export async function deletePost(id){
         try {
-                const response = await axios.delete(`${BASE_URL}/api/forum/${id}`);
+                const response = await axios.delete(`${BASE_URL}/api/forum/${id}`,{
+                        headers: {
+                                authToken: localStorage.getItem('token')
+                        }
+                })
                 return response.data;
         }
         catch (err) {
@@ -45,7 +49,7 @@ export async function createPost(data) {
         try {
                 const response = await axios.post(`${BASE_URL}/api/forum/create/`, object,{
                         headers: {
-                                authToken: localStorage.token
+                                authToken: localStorage.getItem('token')
                         }
                 });
                 return response.data;
@@ -58,7 +62,11 @@ export async function createPost(data) {
 // Update existing post
 export async function updatePost(data, id) {
         try {
-                const response = await axios.post(`${BASE_URL}/api/forum/update/${id}`, { data });
+                const response = await axios.post(`${BASE_URL}/api/forum/update/${id}`, { data },{
+                        headers: {
+                                authToken: localStorage.getItem('token')
+                        }
+                })
                 return response.data;
         }
         catch (err) {
@@ -86,13 +94,14 @@ export function loginSuccessful (res) {
         }
 
         localStorage.setItem("token", res.data.user.token);
-        localStorage.setItem("user",res.data.user.name)
+        localStorage.setItem("user",JSON.stringify(res.data.user))
         store.commit('auth_success',res.data.user)
         router.push('/');
       }
 export function loginFailed (error) {
-        store.commit('auth_error')
-	localStorage.removeItem('token')
+        store.commit('auth_error',error)
+        localStorage.removeItem('token')
+        
 	console.log(error)
         
       }
@@ -106,7 +115,12 @@ export function register(info){
 // Like a post
 export async function addLike(id) {
         try {
-                const response = await axios.put(`${BASE_URL}/api/forum/like/${id}`);
+                
+                const response = await axios.put(`${BASE_URL}/api/forum/like/${id}`, JSON.parse(localStorage.user),{
+                        headers: {
+                                authToken: localStorage.getItem('token')
+                        }
+                })
                 return response.data;
         } catch (err) {
                 return await Promise.reject(err.message);
@@ -116,7 +130,11 @@ export async function addLike(id) {
 // Remove like from post
 export async function removeLike(id) {
         try {
-                const response = await axios.put(`${BASE_URL}/api/forum/unlike/${id}`);
+                const response = await axios.put(`${BASE_URL}/api/forum/unlike/${id}`, JSON.parse(localStorage.user),{
+                        headers: {
+                                authToken: localStorage.getItem('token')
+                        }
+                })
                 return response.data;
         } catch (err) {
                 return await Promise.reject(err.message);

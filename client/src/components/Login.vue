@@ -3,7 +3,7 @@
     <div class="login-wrapper border border-light">
       <form class="form-signin" @submit.prevent="log">
         <h2 class="form-signin-heading">Please sign in</h2>
-        <div class="alert alert-danger" v-if="error">{{ error }}</div>
+        <div class="alert alert-danger" v-if="error">Invalid credentials</div>
         <label for="inputEmail" class="sr-only">Email address</label>
         <input v-model="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
@@ -25,12 +25,17 @@ export default {
     return {
       email: '',
       password: '',
-      error: false
+      
     }
   },
+  
   computed: {
-    
-  },
+    ...mapGetters([
+        'error'
+            
+            
+        ])
+        },
   created () {
     this.checkCurrentLogin()
   },
