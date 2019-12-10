@@ -27,6 +27,7 @@ export default {
     deletePost(id){
       let posts = this.posts.filter(post => post._id != id)
       this.posts = posts;
+      location.reload();
     },
     updatePost(post){
       this.deletePost(post._id);

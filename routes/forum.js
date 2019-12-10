@@ -168,7 +168,7 @@ router.post('/comment/:id', async (req, res) => {
 
       const newComment = {
         text: req.body.text,
-        name: req.body.name,
+        name: req.body.name
       };
 
       post.comments.unshift(newComment);
@@ -187,7 +187,7 @@ router.post('/comment/:id', async (req, res) => {
 router.delete('/comment/:id/:comment_id', auth, async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
-
+    console.log(post)
     // Pull out comment
     const comment = post.comments.find(
       comment => comment.id === req.params.comment_id
@@ -199,7 +199,8 @@ router.delete('/comment/:id/:comment_id', auth, async (req, res) => {
     }
 
     // Check user
-    if (comment.user.toString() !== req.user.id) {
+    if (post.user.toString() !== req.user.id) {
+      
       return res.status(401).json({ msg: 'User not authorized' });
     }
 

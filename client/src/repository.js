@@ -107,11 +107,19 @@ export function loginFailed (error) {
       }
 export function register(info){
         axios.post(`${BASE_URL}/api/users`, {name: info.name, email: info.email, password: info.password})
-                .then(request => loginSuccessful(request))
-                .catch(error => loginFailed(error))
+                .then(request => registerSuccessful(request))
+                .catch(error => registerFailed(error))
         
 }
-
+export function registerFailed (error) {
+        
+	console.log(error)
+        
+      }
+export function registerSuccessful (res) {
+        console.log(res.data);
+        router.push('/login');
+      }
 // Like a post
 export async function addLike(id) {
         try {
@@ -146,11 +154,7 @@ export async function removeLike(id) {
 export async function addComment(id, data) {
         
         try {
-                const response = await axios.post(`${BASE_URL}/api/forum/comment/${id}`, data,{
-                        headers: {
-                                authToken: localStorage.getItem('token')
-                        }
-                })
+                const response = await axios.post(`${BASE_URL}/api/forum/comment/${id}`, data,)
                 return response.data;
 
         } catch (err) {
