@@ -1,7 +1,7 @@
 <template>
     <div class="container">
       <div v-if="posts">
-        <div class="content">
+        <div class="header">
         <CreatePostModule @createPost="createPost"/>
         </div>
         <div>
@@ -48,5 +48,7 @@ export default {
 </script>
 
 <style scoped>
-
+div.header {
+  margin: 5px;
+}
 </style>

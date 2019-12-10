@@ -14,7 +14,7 @@
           </div>
           <div class="field">
             <div class="control">
-              <textarea v-model="body" class="textarea"  placeholder="enter content"></textarea>
+              <textarea v-model="body" class="textarea"  placeholder="Enter content"></textarea>
             </div>
           </div>
           <button @click="update" class="button is-primary is-pulled-right">Post</button>
@@ -56,5 +56,7 @@ export default {
 </script>
 
 <style scoped>
-
+header {
+  color: #000;
+}
 </style>

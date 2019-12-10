@@ -4,7 +4,7 @@
       <h3 class="is-size-3">{{ post.title }}</h3>
       <div class="field is-grouped">
       <button @click="addLike" class="button is-success is-rounded is-small" aria-label="like">Like</button>
-      <AddCommentModule :post="post" @addComment="addComment" :key="post._id"/>
+      <div><AddCommentModule :post="post" @addComment="addComment" :key="post._id"/></div> <!-- Extra div to prevent false warning for duplicate keys -->
       <UpdatePostModule :post="post" @updatePost="updatePost" :key="post._id"/>
       <button @click="deletePost" class="button is-danger is-rounded is-small" aria-label="delete">Delete</button>
       </div>
