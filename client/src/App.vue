@@ -13,17 +13,7 @@ export default {
   computed: {
     
   },
-  created () {
-    this.checkCurrentLogin()
-  },
-  updated () {
-    this.checkCurrentLogin()
-  },
-  methods: {
-    checkCurrentLogin () {
-      
-    }
-  },
+  
   components: {
     Header
   }

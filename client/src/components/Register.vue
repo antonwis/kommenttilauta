@@ -4,7 +4,7 @@
           
           <form @submit.prevent="reg">
             <h2 class="form-register-heading">Register</h2>
-            <div class="alert alert-danger" v-if="error">{{ error }}</div>
+            <div class="alert alert-danger" @loginError="error" v-if="error">{{ error }}</div>
             <label for="name">Name</label>
             <input v-model="name" id="name" class="form-control" type="text" placeholder="Name" required autofocus>
             <label for="email" >Email</label>

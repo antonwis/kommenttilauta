@@ -20,7 +20,8 @@ import {logout} from '../repository'
         name: "Header",
         data(){
             return{
-                user: localStorage.getItem('user')
+                user: ''
+                
             } 
         },
         computed: {
@@ -30,18 +31,26 @@ import {logout} from '../repository'
             
             ])
         },
+        created() {
+            this.getUser()
+        },
+        updated() {
+            this.getUser()
+        },
         methods: {
             logOut(){
                 logout()
             },
-            
+            getUser(){
+                if(JSON.parse(localStorage.getItem('user')).name !== null){
+                    this.user = JSON.parse(localStorage.getItem('user')).name;
+                }else{
+                    this.user = '';
+                }
                 
-            
-        
+            }
         }
-        
-        
-        
+
     }
 </script>
 
