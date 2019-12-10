@@ -187,7 +187,7 @@ router.post('/comment/:id', async (req, res) => {
 router.delete('/comment/:id/:comment_id', auth, async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
-    console.log(post)
+    
     // Pull out comment
     const comment = post.comments.find(
       comment => comment.id === req.params.comment_id
@@ -199,9 +199,11 @@ router.delete('/comment/:id/:comment_id', auth, async (req, res) => {
     }
 
     // Check user
-    if (post.user.toString() !== req.user.id) {
+    console.log(req.data)
+    
+    if (post.user !== req.user.id) {
       
-      return res.status(401).json({ msg: 'User not authorized' });
+      return res.status(401).json({ msg: `User not authorized` });
     }
 
     // Get remove index

@@ -154,7 +154,7 @@ export async function removeLike(id) {
 export async function addComment(id, data) {
         
         try {
-                const response = await axios.post(`${BASE_URL}/api/forum/comment/${id}`, data,)
+                const response = await axios.post(`${BASE_URL}/api/forum/comment/${id}`, data)
                 return response.data;
 
         } catch (err) {
@@ -166,11 +166,13 @@ export async function addComment(id, data) {
 export async function deleteComment(postId, commentId) {
         const user = {id: JSON.parse(localStorage.user).id}
         try {
-                await axios.delete(`${BASE_URL}/api/forum/comment/${postId}/${commentId}`,user,{
-                        headers: {
-                                authToken: localStorage.getItem('token')
-                        }
-                })
+                await axios.delete(`${BASE_URL}/api/forum/comment/${postId}/${commentId}`,{headers: {
+                        authToken: localStorage.getItem('token')
+                },
+                data: {
+                        user
+                }
+        })
                 
         } catch (err) {
                 return await Promise.reject(err.message);
