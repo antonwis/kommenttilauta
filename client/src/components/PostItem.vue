@@ -14,17 +14,15 @@
       <div class="content">
       <span class="has-text-grey-light is-size-7">Created at: {{ post.createdAt | moment }}</span><br>
       <span class="has-text-grey-light is-size-7">last updated: {{ post.updatedAt | moment }}</span>
-      </div>
-      
+      </div> 
     </div>
+
     <div class="message-body">
       <div class="notification is-light" v-for="(comment, index) in comments" :comment="comment" :key="index">
-        <h6 class="title is-6" v-if="comment.name">{{ comment.name }} commented:</h6>
-        <p class="is-size-7" v-if="comment.text">{{ comment.text }}</p>
+        <h6 class="title is-5" v-if="comment.name">{{ comment.name }} <span class="has-text-grey-light is-size-7">commented:</span></h6>
+        <p class="is-size-6" v-if="comment.text">{{ comment.text }}</p>
         <button @click="deleteComment(index)" class="delete" aria-label="delete"></button>
       </div>
-      
-      
     </div>
   </article>
 </template>
