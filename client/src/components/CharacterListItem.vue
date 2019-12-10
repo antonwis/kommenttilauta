@@ -1,16 +1,16 @@
 <template>
   <article class="message">
     <div class="message-header">
-      <h2>{{ character.name }}</h2>
+      <h2 class="is-size-5">{{ character.name }}</h2>
     </div>
     <div class="message-body">
-      <p>Class: {{ character.class }}</p> 
-      <p>Level: {{ character.level }}</p> 
-      <p>League: {{ character.league }}</p> 
+      <p class="is-size-6">Class: {{ character.class }}</p> 
+      <p class="is-size-6">Level: {{ character.level }}</p> 
+      <p class="is-size-6">League: {{ character.league }}</p> 
     </div>
     <form v-on:submit.prevent="characterView">
-            <div class="form-group">
-                <input type="submit" value="View Character Details" class="btn" />
+            <div class="field">
+                <input type="submit" value="View Character Details" class="button is-small is-info"/>
             </div>
         </form>
 
