@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <div class="modal" :class="{ 'is-active': isActive }">
       <div class="modal-background"></div>
       <div class="modal-card">
@@ -23,7 +23,7 @@
       </div>
       <button @click="toggle" class="modal-close is-large" aria-label="close"></button>
     </div>
-    <button @click="toggle" class="button is-primary is-pulled-right">Create New Post</button>
+    <button @click="toggle" class="button is-primary is-large">New Post</button>
     <br>
   </div>
 </template>

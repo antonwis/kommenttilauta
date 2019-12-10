@@ -22,7 +22,7 @@
       </div>
       <button @click="toggle" class="modal-close is-large" aria-label="close"></button>
     </div>
-    <button @click="toggle" class="button is-small is-pulled-right">Edit</button>
+    <button @click="toggle" class="button is-warning is-rounded is-small">Edit</button>
   </div>
 </template>
  
