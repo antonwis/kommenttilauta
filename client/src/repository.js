@@ -115,8 +115,8 @@ export function register(info){
 // Like a post
 export async function addLike(id) {
         try {
-                
-                const response = await axios.put(`${BASE_URL}/api/forum/like/${id}`, JSON.parse(localStorage.user),{
+                const user = {id: JSON.parse(localStorage.user).id}
+                const response = await axios.put(`${BASE_URL}/api/forum/like/${id}`,user ,{
                         headers: {
                                 authToken: localStorage.getItem('token')
                         }
@@ -130,7 +130,8 @@ export async function addLike(id) {
 // Remove like from post
 export async function removeLike(id) {
         try {
-                const response = await axios.put(`${BASE_URL}/api/forum/unlike/${id}`, JSON.parse(localStorage.user),{
+                const user = {id: JSON.parse(localStorage.user).id}
+                const response = await axios.put(`${BASE_URL}/api/forum/unlike/${id}`, user,{
                         headers: {
                                 authToken: localStorage.getItem('token')
                         }
@@ -145,7 +146,11 @@ export async function removeLike(id) {
 export async function addComment(id, data) {
         
         try {
-                const response = await axios.post(`${BASE_URL}/api/forum/comment/${id}`, data);
+                const response = await axios.post(`${BASE_URL}/api/forum/comment/${id}`, data,{
+                        headers: {
+                                authToken: localStorage.getItem('token')
+                        }
+                })
                 return response.data;
 
         } catch (err) {
@@ -155,9 +160,13 @@ export async function addComment(id, data) {
 
 // Delete a comment from a post
 export async function deleteComment(postId, commentId) {
-        
+        const user = {id: JSON.parse(localStorage.user).id}
         try {
-                await axios.delete(`${BASE_URL}/api/forum/comment/${postId}/${commentId}`);
+                await axios.delete(`${BASE_URL}/api/forum/comment/${postId}/${commentId}`,user,{
+                        headers: {
+                                authToken: localStorage.getItem('token')
+                        }
+                })
                 
         } catch (err) {
                 return await Promise.reject(err.message);
