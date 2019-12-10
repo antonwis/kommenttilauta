@@ -23,7 +23,7 @@
       </div>
       <button @click="toggle" class="modal-close is-large" aria-label="close"></button>
     </div>
-    <button @click="toggle" class="button is-primary is-pulled-right">Add a comment</button>
+    <button @click="toggle" class="button is-info is-rounded is-small">Comment</button>
     <br>
   </div>
 </template>

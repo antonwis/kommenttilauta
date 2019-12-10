@@ -1,8 +1,9 @@
 <template>
     <div class="container">
       <div v-if="posts">
+        <div class="content">
         <CreatePostModule @createPost="createPost"/>
-        <br>
+        </div>
         <div>
           <PostItem v-for="(post, index) in posts" :post="post" :key="index" @deletePost="deletePost" @updatePost="updatePost"/>
         </div>

@@ -1,28 +1,29 @@
 <template>
   <article class="message">
     <div class="message-header">
-      <p>{{ post.title }}</p>
- 
-      <button @click="addLike" class="like_button" aria-label="like">Like</button> 
-      <button @click="deletePost" class="delete" aria-label="delete"></button>
-      
+      <h3 class="is-size-3">{{ post.title }}</h3>
+      <div class="field is-grouped">
+      <button @click="addLike" class="button is-success is-rounded is-small" aria-label="like">Like</button>
+      <AddCommentModule :post="post" @addComment="addComment" :key="post._id"/>
+      <UpdatePostModule :post="post" @updatePost="updatePost" :key="post._id"/>
+      <button @click="deletePost" class="button is-danger is-rounded is-small" aria-label="delete">Delete</button>
+      </div>
     </div>
     <div class="message-body">
       {{ post.body }}
-      <br>
-      <br>
-      <span class="has-text-grey-light">Created at: {{ post.createdAt | moment }}</span>
-      <br>
-      <span class="has-text-grey-light">last updated: {{ post.updatedAt | moment }}</span><br>
-      <UpdatePostModule :post="post" @updatePost="updatePost" :key="post._id"/>
+      <div class="content">
+      <span class="has-text-grey-light is-size-7">Created at: {{ post.createdAt | moment }}</span><br>
+      <span class="has-text-grey-light is-size-7">last updated: {{ post.updatedAt | moment }}</span>
+      </div>
+      
     </div>
     <div class="message-body">
-      <div v-for="(comment, index) in comments" :comment="comment" :key="index">
-        <h6 v-if="comment.name">{{ comment.name }}</h6>
-        <p v-if="comment.text">{{ comment.text }}</p>
+      <div class="notification is-light" v-for="(comment, index) in comments" :comment="comment" :key="index">
+        <h6 class="title is-6" v-if="comment.name">{{ comment.name }} commented:</h6>
+        <p class="is-size-7" v-if="comment.text">{{ comment.text }}</p>
         <button @click="deleteComment(index)" class="delete" aria-label="delete"></button>
       </div>
-      <AddCommentModule :post="post" @addComment="addComment" :key="post._id"/>
+      
       
     </div>
   </article>
@@ -78,3 +79,6 @@
     }
   }
 </script>
+
+<style scoped>
+</style>
