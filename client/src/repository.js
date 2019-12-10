@@ -164,7 +164,7 @@ export async function addComment(id, data) {
 
 // Delete a comment from a post
 export async function deleteComment(postId, commentId) {
-        const user = {id: JSON.parse(localStorage.user).id}
+        const user = JSON.parse(localStorage.user).id
         try {
                 await axios.delete(`${BASE_URL}/api/forum/comment/${postId}/${commentId}`,{headers: {
                         authToken: localStorage.getItem('token')
