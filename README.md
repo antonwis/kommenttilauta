@@ -286,6 +286,7 @@ charName: name of the character
 
 ```
 GET api/poe/account/:accountName/:charName/items
+```
 
 Gets the equipped item data of a character
 
