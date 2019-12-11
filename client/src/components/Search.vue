@@ -5,12 +5,10 @@
 
         <h1 class="subtitle is-size-4">Search for accounts, characters and leagues</h1>
         <form v-on:submit.prevent="charList">
-            <div class="field">
-                <label class="label" for="account">Account</label>
+            <label class="label" for="account">Account</label>
+            <div class="field is-grouped">
                 <input class="input" type="textarea" name="text" v-model="account" id="account" placeholder="Search for accounts" />
-            </div>
-            <div class="field">
-                <input class="button is-dark" type="submit" value="Submit"/>
+                <input class="button is-dark" type="submit" value="Search"/>
             </div>
         </form>
 
