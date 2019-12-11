@@ -40,10 +40,8 @@ import {logout} from '../repository'
             } 
         },
         computed: {
-            ...mapGetters([
+        ...mapGetters([
             'isLoggedIn',
-            
-            
             ])
         },
         created() {

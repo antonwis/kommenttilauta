@@ -3,10 +3,13 @@
     <div class="message-header">
       <h3 class="is-size-3">{{ post.title }}</h3>
       <div class="field is-grouped">
-      <button @click="addLike" class="button is-success is-rounded is-small" aria-label="like">Like</button>
+      
+      <button @click="addLike" v-if="!this.liked" class="button is-success is-rounded is-small" aria-label="like">Like</button>
+      <button @click="removeLike" v-else class="button is-danger is-rounded is-small" aria-label="unlike">Unlike</button>
+      
       <div><AddCommentModule :post="post" @addComment="addComment" :key="post._id"/></div> <!-- Extra div to prevent false warning for duplicate keys -->
-      <UpdatePostModule :post="post" @updatePost="updatePost" :key="post._id"/>
-      <button @click="deletePost" class="button is-danger is-rounded is-small" aria-label="delete">Delete</button>
+      <UpdatePostModule v-if="post.user == checkUser.id" :post="post" @updatePost="updatePost" :key="post._id"/>
+      <button @click="deletePost" v-if="post.user == checkUser.id" class="button is-danger is-rounded is-small" aria-label="delete">Delete</button>
       </div>
     </div>
     <div class="message-body">
@@ -27,9 +30,10 @@
   </article>
 </template>
 <script>
-  import { deletePost, addComment, deleteComment, addLike } from '../repository'
+  import { deletePost, addComment, deleteComment, addLike, removeLike } from '../repository'
   import UpdatePostModule from './UpdatePostModule'
   import AddCommentModule from './AddCommentModule'
+  import {mapGetters} from 'vuex'
   import Moment from 'moment'
  
   export default {
@@ -38,8 +42,19 @@
     components: { UpdatePostModule, AddCommentModule },
     data(){
       return {
-        comments: []
+        comments: [],
+        liked: false
       }
+    },
+    computed: {
+      ...mapGetters([
+        'isLoggedIn',
+        'checkUser'
+        ]),
+    
+    },
+    created(){
+      this.checkIfLiked();
     },
     methods: {
       deletePost(e){
@@ -65,7 +80,24 @@
       addLike(e) {
         e.preventDefault();
         addLike(this.post._id)
-          .catch(err => console.log(err))      
+          .catch(err => console.log(err));
+          location.reload();
+      },
+      removeLike(e) {
+        e.preventDefault();
+        removeLike(this.post._id)
+          .catch(err => console.log(err));
+          location.reload();
+      },
+      checkIfLiked(){
+        this.post.likes.forEach(like => {
+          
+           if(like.user === this.checkUser.id) {
+             this.liked = true;
+           } else {
+             this.liked = false;
+           }
+        });
       }
     },
     filters: {
@@ -75,6 +107,7 @@
     },
     mounted() {
       this.comments = this.post.comments;
+      
     }
   }
 </script>
