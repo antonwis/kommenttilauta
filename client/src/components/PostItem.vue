@@ -5,7 +5,11 @@
       <div class="field is-grouped">
       
       <button @click="addLike" v-if="!this.liked" class="button is-success is-rounded is-small" aria-label="like">Like</button>
+<<<<<<< HEAD
       <button @click="addLike" v-else class="button is-danger is-rounded is-small" aria-label="unlike">Unlike</button>
+=======
+      <button @click="removeLike" v-else class="button is-danger is-rounded is-small" aria-label="unlike">Unlike</button>
+>>>>>>> a2348a0b14dda434020e1a17d1524e3bc7f07240
       
       <div><AddCommentModule :post="post" @addComment="addComment" :key="post._id"/></div> <!-- Extra div to prevent false warning for duplicate keys -->
       <UpdatePostModule v-if="post.user == checkUser.id" :post="post" @updatePost="updatePost" :key="post._id"/>
@@ -30,7 +34,7 @@
   </article>
 </template>
 <script>
-  import { deletePost, addComment, deleteComment, addLike } from '../repository'
+  import { deletePost, addComment, deleteComment, addLike, removeLike } from '../repository'
   import UpdatePostModule from './UpdatePostModule'
   import AddCommentModule from './AddCommentModule'
   import {mapGetters} from 'vuex'
@@ -54,9 +58,14 @@
     
     },
     created(){
+<<<<<<< HEAD
       this.checkIfLiked()
     },
     
+=======
+      this.checkIfLiked();
+    },
+>>>>>>> a2348a0b14dda434020e1a17d1524e3bc7f07240
     methods: {
       deletePost(e){
         e.preventDefault();
@@ -81,7 +90,17 @@
       addLike(e) {
         e.preventDefault();
         addLike(this.post._id)
+<<<<<<< HEAD
           .catch(err => console.log(err))
+=======
+          .catch(err => console.log(err));
+          location.reload();
+      },
+      removeLike(e) {
+        e.preventDefault();
+        removeLike(this.post._id)
+          .catch(err => console.log(err));
+>>>>>>> a2348a0b14dda434020e1a17d1524e3bc7f07240
           location.reload();
       },
       checkIfLiked(){
@@ -102,6 +121,7 @@
     },
     mounted() {
       this.comments = this.post.comments;
+      
     }
   }
 </script>
