@@ -4,7 +4,8 @@
       <h3 class="is-size-3">{{ post.title }}</h3>
       <div class="field is-grouped">
       
-      <button @click="addLike" v-if="!checkIfLiked"  class="button is-success is-rounded is-small" aria-label="like">Like</button>
+      <button @click="addLike" v-if="!this.liked" class="button is-success is-rounded is-small" aria-label="like">Like</button>
+      <button @click="addLike" v-else class="button is-danger is-rounded is-small" aria-label="unlike">Unlike</button>
       
       <div><AddCommentModule :post="post" @addComment="addComment" :key="post._id"/></div> <!-- Extra div to prevent false warning for duplicate keys -->
       <UpdatePostModule v-if="post.user == checkUser.id" :post="post" @updatePost="updatePost" :key="post._id"/>
@@ -55,9 +56,7 @@
     created(){
       this.checkIfLiked()
     },
-    updated(){
-      this.checkIfLiked()
-    },
+    
     methods: {
       deletePost(e){
         e.preventDefault();
@@ -83,22 +82,19 @@
         e.preventDefault();
         addLike(this.post._id)
           .catch(err => console.log(err))
+          location.reload();
       },
       checkIfLiked(){
-        const likes = this.post.likes;
-        for(const like in likes){
-          console.log(like)
-          console.log(this.checkUser.id)
-          if(like.user == this.checkUser.id){
-            return true
-            
-          }else{
-            return false
-          }
+        this.post.likes.forEach(like => {
           
-        }
+           if(like.user === this.checkUser.id) {
+             this.liked = true;
+           } else {
+             this.liked = false;
+           }
+        });
       }
-    },
+      },
     filters: {
       moment(date) {
         return Moment(date).format('MMMM Do YYYY, h:mm:ss a');
