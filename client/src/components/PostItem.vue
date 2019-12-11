@@ -53,6 +53,7 @@
          deleteComment(this.post._id, this.comments[i]._id)
            .then(() => this.$emit('deleteComment', this.comments._id))
            .catch(err => console.log(err));
+           location.reload();
       },
       updatePost(post){
         this.$emit('updatePost', post)
