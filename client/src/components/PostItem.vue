@@ -2,14 +2,15 @@
   <article class="message">
     <div class="message-header">
       <h3 class="is-size-3">{{ post.title }}</h3>
+      <p class="is-size-7">Likes: {{ post.likes.length }}</p>
       <div class="field is-grouped">
       
-      <button @click="addLike" v-if="!this.liked" class="button is-success is-rounded is-small" aria-label="like">Like</button>
-      <button @click="removeLike" v-else class="button is-danger is-rounded is-small" aria-label="unlike">Unlike</button>
+      <button v-if="!checkIfLiked()" @click="addLike" class="button is-success is-rounded is-small" aria-label="like">Like</button>
+      <button v-else @click="removeLike" class="button is-danger is-rounded is-small" aria-label="unlike">Unlike</button>
       
       <div><AddCommentModule :post="post" @addComment="addComment" :key="post._id"/></div> <!-- Extra div to prevent false warning for duplicate keys -->
-      <UpdatePostModule v-if="post.user == checkUser.id" :post="post" @updatePost="updatePost" :key="post._id"/>
-      <button @click="deletePost" v-if="post.user == checkUser.id" class="button is-danger is-rounded is-small" aria-label="delete">Delete</button>
+      <UpdatePostModule v-if="post.user === checkUser.id" :post="post" @updatePost="updatePost" :key="post._id"/>
+      <button @click="deletePost" v-if="post.user === checkUser.id" class="button is-danger is-rounded is-small" aria-label="delete">Delete</button>
       </div>
     </div>
     <div class="message-body">
@@ -80,25 +81,25 @@
       addLike(e) {
         e.preventDefault();
         addLike(this.post._id)
-          .catch(err => console.log(err));
-          location.reload();
+          .catch(err => console.log(err))
+          .then(location.reload());
       },
       removeLike(e) {
         e.preventDefault();
         removeLike(this.post._id)
-          .catch(err => console.log(err));
-          location.reload();
+          .catch(err => console.log(err))
+          .then(location.reload())
       },
       checkIfLiked(){
-        this.post.likes.forEach(like => {
-          
-           if(like.user === this.checkUser.id) {
-             this.liked = true;
-           } else {
-             this.liked = false;
-           }
+        var likeCheck = false;
+          this.post.likes.forEach(like => {
+            if(like.user === this.checkUser.id) {
+              likeCheck = true;
+            }
         });
-      }
+        return likeCheck;
+       }
+      
     },
     filters: {
       moment(date) {
@@ -106,8 +107,7 @@
       }
     },
     mounted() {
-      this.comments = this.post.comments;
-      
+      this.comments = this.post.comments;  
     }
   }
 </script>
