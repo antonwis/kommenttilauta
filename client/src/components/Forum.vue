@@ -37,13 +37,14 @@ export default {
     createPost(post){
         this.posts = [post, ...this.posts];
         location.reload();
-    }
+    }, 
   },
   mounted() {
     getPosts()
       .then(data => this.posts = data.posts)
       .catch((err => console.log(err)));
-  }
+  },
+  
 }
 </script>
 
