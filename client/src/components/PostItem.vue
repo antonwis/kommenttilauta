@@ -65,7 +65,7 @@
       addLike(e) {
         e.preventDefault();
         addLike(this.post._id)
-          .catch(err => console.log(err))
+          .catch(err => console.log(err))      
       }
     },
     filters: {
