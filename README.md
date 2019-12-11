@@ -1,0 +1,2 @@
+# kommenttilauta
+peliaiheinen kommenttilauta

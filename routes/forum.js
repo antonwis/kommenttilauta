@@ -76,7 +76,13 @@ router.post(
 // Update existing post
 router.post('/update/:_id', (req, res) => {
     let options = { new: true };
+    
       Post.findByIdAndUpdate(req.params._id, req.body.data , options, (err, post) => {
+      
+      const userID = post.user.toString();
+      if (userID !== req.body.user.id) {
+        return res.status(401).json({ msg: `User not authorized` });
+      }
         if (err) return res.status(404).send({message: err.message});
         return res.send({ message: 'Post updated!', post });
       });
