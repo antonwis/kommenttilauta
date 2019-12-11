@@ -55,6 +55,7 @@ import {logout} from '../repository'
         methods: {
             logOut(){
                 logout()
+                location.reload();
             },
             getUser(){
                 if(JSON.parse(localStorage.getItem('user')).name !== null){
