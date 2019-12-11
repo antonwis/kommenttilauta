@@ -23,12 +23,13 @@
       </div>
       <button @click="toggle" class="modal-close is-large" aria-label="close"></button>
     </div>
-    <button @click="toggle" class="button is-success is-large">New Post</button>
+    <button v-if="isLoggedIn" @click="toggle" class="button is-success is-large">New Post</button>
   </div>
 </template>
  
 <script>
 import { createPost }  from '../repository'
+import { mapGetters } from 'vuex'
 export default {
   name: 'CreatePostModule',
   data(){
@@ -37,6 +38,11 @@ export default {
       body: '',
       isActive: false
     }
+  },
+  computed: {
+    ...mapGetters([
+      'isLoggedIn', 
+    ])
   },
   methods: {
     create(){
@@ -53,7 +59,7 @@ export default {
     toggle(){
       this.isActive = !this.isActive;
     },
-  },
+  }
 }
 </script>
 

@@ -57,7 +57,11 @@ export async function createPost(data) {
                                 authToken: localStorage.getItem('token')
                         }
                 });
+                if(response.status == 401){
+                        alert("mo");
+                }
                 return response.data;
+                
         }
         catch (err) {
                 return await Promise.reject(err.message);
@@ -73,6 +77,7 @@ export async function updatePost(data, id) {
                                 authToken: localStorage.getItem('token')
                         }
                 })
+                
                 return response.data;
         }
         catch (err) {
