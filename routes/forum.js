@@ -11,7 +11,7 @@ const User = require('../models/User');
 // GET all forum posts
 router.get('/list', async (req, res) => {
   try {
-    const posts = await Post.find({}).sort({updatedAt: 'descending'});
+    const posts = await Post.find({});
     res.send({posts});
   } catch (err) {
     console.error(err.message);

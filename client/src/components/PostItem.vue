@@ -4,17 +4,10 @@
       <h3 class="is-size-3">{{ post.title }}</h3>
       <p class="is-size-7">Likes: {{ post.likes.length }}</p>
       <div class="field is-grouped">
-<<<<<<< HEAD
-      
-      <button v-if="!checkIfLiked()" @click="addLike" class="button is-success is-rounded is-small" aria-label="like">Like</button>
-      <button v-else @click="removeLike" class="button is-danger is-rounded is-small" aria-label="unlike">Unlike</button>
-      
-=======
       <div v-if="isLoggedIn">
       <button @click="addLike" v-if="!checkIfLiked()" class="button is-success is-rounded is-small" aria-label="like">Like</button>
       <button @click="removeLike" v-else class="button is-danger is-rounded is-small" aria-label="unlike">Unlike</button>
       </div>
->>>>>>> 717ceec45d88bd050cc6b7658324afa2b46b578b
       <div><AddCommentModule :post="post" @addComment="addComment" :key="post._id"/></div> <!-- Extra div to prevent false warning for duplicate keys -->
       <UpdatePostModule v-if="post.user === checkUser.id" :post="post" @updatePost="updatePost" :key="post._id"/>
       <button @click="deletePost" v-if="post.user === checkUser.id" class="button is-danger is-rounded is-small" aria-label="delete">Delete</button>
@@ -96,17 +89,6 @@
           .then(location.reload())
       },
       checkIfLiked(){
-<<<<<<< HEAD
-        var likeCheck = false;
-          this.post.likes.forEach(like => {
-            if(like.user === this.checkUser.id) {
-              likeCheck = true;
-            }
-        });
-        return likeCheck;
-       }
-      
-=======
         let kappa = false
         this.post.likes.forEach(like => {
          
@@ -117,7 +99,6 @@
         });
         return kappa;
       }
->>>>>>> 717ceec45d88bd050cc6b7658324afa2b46b578b
     },
     filters: {
       moment(date) {
