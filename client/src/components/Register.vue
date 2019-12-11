@@ -10,9 +10,9 @@
             <label class="label" for="email" >Email</label>
             <input v-model="email" id="email" class="input" type="text" placeholder="Email" required autofocus>
             <label class="label" for="password">Password</label>
-            <input v-model="password" type="password" id="inputPassword" class="input" placeholder="Password" required>
+            <input v-model="password" type="password" id="inputPassword" class="input" placeholder="Enter a password -- min. 6 characters" required>
             <label class="label" for="password-confirm">Confirm Password</label>
-            <input v-model="password" type="password" id="inputPasswordConfirm" class="input" placeholder="Confirm Password" required>
+            <input v-model="password_confirmation" type="password" id="inputPasswordConfirm" class="input" placeholder="Confirm Password" required>
             <button class="button is-rounded is-primary" type="submit">Register</button>
             <router-link to="/login" class="button is-rounded is-danger">Go Back</router-link>
               
@@ -55,7 +55,11 @@
               password: this.password,
               
             };
-            register(data);
+            if(this.password === this.password_confirmation) {
+              register(data);
+            } else {
+              alert("Please check your password");
+            }
           }
         }
       };
