@@ -30,10 +30,15 @@ export async function getPost(id) {
  
 // Delete post by id
 export async function deletePost(id){
+        const user = {id: JSON.parse(localStorage.user).id}
         try {
                 const response = await axios.delete(`${BASE_URL}/api/forum/${id}`,{
                         headers: {
                                 authToken: localStorage.getItem('token')
+                        }
+                        ,
+                        data: {
+                                user
                         }
                 })
                 return response.data;
@@ -61,8 +66,9 @@ export async function createPost(data) {
  
 // Update existing post
 export async function updatePost(data, id) {
+        const user = {id: JSON.parse(localStorage.user).id}
         try {
-                const response = await axios.post(`${BASE_URL}/api/forum/update/${id}`, { data },{
+                const response = await axios.post(`${BASE_URL}/api/forum/update/${id}`, { data,user },{
                         headers: {
                                 authToken: localStorage.getItem('token')
                         }
