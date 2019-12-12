@@ -23,15 +23,18 @@
             <div class="media">
               <div id="itemheader" v-if="item.explicitMods" class="media-content">
                 <h4 id="itemtitlerare" v-if="item.explicitMods.length > 3 && !item.flavourText" class="title is-size-4">{{ item.name }}</h4>
+                <h4 id="itemtitlerare" v-if="item.explicitMods.length <= 3 && item.craftedMods" class="title is-size-4">{{ item.name }}</h4>
                 <h4 id="itemtitleunique" v-if="item.explicitMods.length > 3 && item.flavourText" class="title is-size-4">{{ item.name }}</h4>
-                <h4 id="itemtitleuniqueflask" v-if="item.explicitMods.length <= 3 && item.name" class="title is-size-4">{{ item.name }}</h4>
+                <h4 id="itemtitleuniqueflask" v-if="item.explicitMods.length <= 3 && item.flavourText" class="title is-size-4">{{ item.name }}</h4>
                 <h4 id="itemtitlemagic" v-if="item.explicitMods.length <= 3 && !item.name" class="title is-size-4">{{ item.typeLine }}</h4>
             
                 <h6 id="itembase" v-if="item.explicitMods.length > 3" class="subtitle is-size-6">{{ item.typeLine }}</h6>
                 <h6 id="itembase" v-if="item.explicitMods.length <= 3 && item.name" class="subtitle is-size-6">{{ item.typeLine }}</h6>
               </div>
               <div id="itemheader" v-if="!item.explicitMods" class="media-content">
-                <h6 id="itembase" v-if="item.typeLine" class="subtitle is-size-6">{{ item.typeLine }}</h6>
+                <h4 id="itemtitleunique" v-if="item.typeLine && item.name" class="title is-size-4">{{ item.name }}</h4>
+                <h6 id="itemtitlenormal" v-if="item.typeLine && !item.flavourText" class="subtitle is-size-6">{{ item.typeLine }}</h6>
+                
               </div>
             </div>
             <div class="content">
@@ -39,6 +42,10 @@
               <p class="is-size-6" id="implicit" v-if="item.implicitMods">{{ item.implicitMods[0] }}</p>
               <p class="is-size-6" id="affix" v-for="(mod, index) in item.explicitMods" :mod="mod" :key="index">{{ mod }}</p>
               <p class="is-size-6" id="crafted" v-if="item.craftedMods">{{ item.craftedMods[0] }}</p>
+              <p class="is-size-6" id="crafted" v-if="item.craftedMods && item.craftedMods.length > 1">{{ item.craftedMods[1] }}</p>
+              <p class="is-size-6" id="crafted" v-if="item.craftedMods && item.craftedMods.length > 2">{{ item.craftedMods[2] }}</p>
+              <p class="is-size-6" id="crafted" v-if="item.craftedMods && item.craftedMods.length > 3">{{ item.craftedMods[3] }}</p>
+              <p class="is-size-6" id="crafted" v-if="item.craftedMods && item.craftedMods.length > 4">{{ item.craftedMods[4] }}</p>
             </div>
           </div>
         </div>
