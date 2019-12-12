@@ -11,7 +11,7 @@ const User = require('../models/User');
 // GET all forum posts
 router.get('/list', async (req, res) => {
   try {
-    const posts = await Post.find({}).sort({updatedAt: 'descending'});
+    const posts = await Post.find({});
     res.send({posts});
   } catch (err) {
     console.error(err.message);
@@ -74,12 +74,30 @@ router.post(
 });
 
 // Update existing post
-router.post('/update/:_id', (req, res) => {
+router.post('/update/:_id', async (req, res) => {
+  try{
     let options = { new: true };
-      Post.findByIdAndUpdate(req.params._id, req.body.data , options, (err, post) => {
-        if (err) return res.status(404).send({message: err.message});
-        return res.send({ message: 'Post updated!', post });
-      });
+    
+    const post = await Post.findById(req.params._id);
+      console.log(post)
+      console.log(req.body.user.id)
+      const userID = post.user.toString();
+      if (userID !== req.body.user.id) {
+        return res.status(401).json({ msg: `User not authorized` });
+      }
+      
+      
+
+      post.body = req.body.data.body;
+      post.title = req.body.data.title;
+      await post.save();
+
+      return res.send({ message: 'Post updated!', post });
+    }catch(err){
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
+      
     });
 
 // DELETE post by id
@@ -168,7 +186,7 @@ router.post('/comment/:id', async (req, res) => {
 
       const newComment = {
         text: req.body.text,
-        name: req.body.name,
+        name: req.body.name
       };
 
       post.comments.unshift(newComment);
@@ -199,8 +217,11 @@ router.delete('/comment/:id/:comment_id', auth, async (req, res) => {
     }
 
     // Check user
-    if (comment.user.toString() !== req.user.id) {
-      return res.status(401).json({ msg: 'User not authorized' });
+    
+    const userID = post.user.toString();
+    if (userID !== req.user.id) {
+      
+      return res.status(401).json({ msg: `User not authorized` });
     }
 
     // Get remove index

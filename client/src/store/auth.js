@@ -8,19 +8,21 @@ export default new Vuex.Store({
   state: {
     status: '',
     token: localStorage.getItem('token') || '',
-    user: {}
+    user: JSON.parse(localStorage.getItem('user')) || {id: '', name: ''},
+    error: ''
   },
   mutations: {
     auth_request(state) {
       state.status = 'loading'
     },
-    auth_success(state, token, user) {
+    auth_success(state, user) {
       state.status = 'success'
-      state.token = token
+      state.token = user.token
       state.user = user
     },
-    auth_error(state) {
+    auth_error(state, error) {
       state.status = 'error'
+      state.error = error
     },
     logout(state) {
      
@@ -30,8 +32,9 @@ export default new Vuex.Store({
   },
   getters: {
     isLoggedIn: state => !!state.token,
-    authStatus: state => state.status
-
+    authStatus: state => state.status,
+    checkUser: state => state.user,
+    error: state => state.error
   }
   
 })

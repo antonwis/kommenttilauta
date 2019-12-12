@@ -1,10 +1,11 @@
 <template>
     <div class="container">
       <div v-if="posts">
+        <div class="header">
         <CreatePostModule @createPost="createPost"/>
-        <br>
+        </div>
         <div>
-          <PostItem v-for="(post, index) in posts" :post="post" :key="index" @deletePost="deletePost" @updatePost="updatePost" @addComment="addComment"/>
+          <PostItem v-for="(post, index) in posts" :post="post" :key="index" @deletePost="deletePost" @updatePost="updatePost"/>
         </div>
       </div>
     </div>
@@ -27,6 +28,7 @@ export default {
     deletePost(id){
       let posts = this.posts.filter(post => post._id != id)
       this.posts = posts;
+      location.reload();
     },
     updatePost(post){
       this.deletePost(post._id);
@@ -34,19 +36,20 @@ export default {
     },
     createPost(post){
         this.posts = [post, ...this.posts];
-    },
-    addComment(comment) {
-      this.posts.comments = [comment, ...this.posts.comments];
-    }
+        location.reload();
+    }, 
   },
   mounted() {
     getPosts()
       .then(data => this.posts = data.posts)
       .catch((err => console.log(err)));
-  }
+  },
+  
 }
 </script>
 
 <style scoped>
-
+div.header {
+  margin: 5px;
+}
 </style>

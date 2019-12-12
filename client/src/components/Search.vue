@@ -1,33 +1,31 @@
 <template>
-    <section class="search">
+    <section class="notification">
 
-        <h1>Search for leagues</h1>
+        <h1 class="title is-size-1">Path of Exile database</h1>
+
+        <h1 class="subtitle is-size-4">Search for accounts, characters and leagues</h1>
+        <form v-on:submit.prevent="charList">
+            <label class="label" for="account">Account</label>
+            <div class="field is-grouped">
+                <input class="input" type="textarea" name="text" v-model="account" id="account" placeholder="Search for accounts" />
+                <input class="button is-dark" type="submit" value="Search"/>
+            </div>
+        </form>
+
+
         <form v-on:submit.prevent="onSubmit">
-            <div class="form-group">
-                <label for="league">League</label>
-                <input type="textarea" name="text" v-model="league" id="league" placeholder="Search for leagues" />
+            <label class="label" for="league">League</label>
+            <div class="field is-grouped">
+                <input class="input" type="textarea" name="text" v-model="league" id="league" placeholder="Search for leagues" />
+                <input class="button is-dark" type="submit" value="Search"/>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Submit" class="btn" />
+            <div class="field">
+                <router-link to="/poe/leagues/">
+            <input class="button is-dark" type="submit" value="View all leagues"/></router-link>
             </div>
-
-             <div class="form-group">
-            <router-link to="/poe/leagues/">
-            <input type="submit" value="View all leagues" class="btn" /></router-link>
-             </div>
-
         </form>
         
-        <h1>Search for account</h1>
-        <form v-on:submit.prevent="charList">
-            <div class="form-group">
-                <label for="account">Account</label>
-                <input type="textarea" name="text" v-model="account" id="account" placeholder="Search for accounts" />
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Submit" class="btn" />
-            </div>
-        </form>
+        
 
     </section>
 </template>
@@ -64,6 +62,5 @@ export default {
 </script>
 
 <style scoped>
-
 
 </style>

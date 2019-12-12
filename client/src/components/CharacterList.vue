@@ -36,7 +36,7 @@ export default {
         } catch (err) {
             this.loading = false;
             this.error = err.response.data.message;
-        }
+        }       
     }
 }
 </script>

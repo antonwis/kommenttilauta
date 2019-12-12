@@ -18,13 +18,12 @@
                 </textarea>
             </div>
           </div>
-          <button @click="create" class="button is-primary is-pulled-right">Submit</button>
+          <button @click="create" class="button is-primary is-pulled-right">Publish</button>
         </section>
       </div>
       <button @click="toggle" class="modal-close is-large" aria-label="close"></button>
     </div>
-    <button @click="toggle" class="button is-primary is-pulled-right">Add a comment</button>
-    <br>
+    <button @click="toggle" class="button is-info is-rounded is-small">Comment</button>
   </div>
 </template>
  
@@ -60,5 +59,7 @@ export default {
 </script>
 
 <style scoped>
-
+header {
+  color: #000;
+}
 </style>

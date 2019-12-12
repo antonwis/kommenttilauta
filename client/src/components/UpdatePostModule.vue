@@ -14,7 +14,7 @@
           </div>
           <div class="field">
             <div class="control">
-              <textarea v-model="body" class="textarea"  placeholder="enter content"></textarea>
+              <textarea v-model="body" class="textarea"  placeholder="Enter content"></textarea>
             </div>
           </div>
           <button @click="update" class="button is-primary is-pulled-right">Post</button>
@@ -22,7 +22,7 @@
       </div>
       <button @click="toggle" class="modal-close is-large" aria-label="close"></button>
     </div>
-    <button @click="toggle" class="button is-small is-pulled-right">Edit</button>
+    <button @click="toggle" class="button is-warning is-rounded is-small">Edit</button>
   </div>
 </template>
  
@@ -56,5 +56,7 @@ export default {
 </script>
 
 <style scoped>
-
+header {
+  color: #000;
+}
 </style>

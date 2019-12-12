@@ -9,27 +9,27 @@
         <section class="modal-card-body">
           <div class="field">
             <div class="control">
-              <input v-model="title" class="input" type="text" placeholder="title">
+              <input v-model="title" class="input" type="text" placeholder="Title">
             </div>
           </div>
           <div class="field">
             <div class="control">
-              <textarea v-model="body" class="textarea"  placeholder="enter content">
+              <textarea v-model="body" class="textarea"  placeholder="Enter content">
                 </textarea>
             </div>
           </div>
-          <button @click="create" class="button is-primary is-pulled-right">Post</button>
+          <button @click="create" class="button is-primary is-pulled-right">Publish</button>
         </section>
       </div>
       <button @click="toggle" class="modal-close is-large" aria-label="close"></button>
     </div>
-    <button @click="toggle" class="button is-primary is-pulled-right">Create New Post</button>
-    <br>
+    <button v-if="isLoggedIn" @click="toggle" class="button is-success is-large">New Post</button>
   </div>
 </template>
  
 <script>
 import { createPost }  from '../repository'
+import { mapGetters } from 'vuex'
 export default {
   name: 'CreatePostModule',
   data(){
@@ -38,6 +38,11 @@ export default {
       body: '',
       isActive: false
     }
+  },
+  computed: {
+    ...mapGetters([
+      'isLoggedIn', 
+    ])
   },
   methods: {
     create(){
@@ -54,7 +59,7 @@ export default {
     toggle(){
       this.isActive = !this.isActive;
     },
-  },
+  }
 }
 </script>
 

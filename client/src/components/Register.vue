@@ -1,20 +1,20 @@
  <template>
-        <div class="register-overlay">
-          <div class="register-wrapper border border-light">
+        <div class="notification">
+          <div class="field">
           
           <form @submit.prevent="reg">
-            <h2 class="form-register-heading">Register</h2>
-            <div class="alert alert-danger" v-if="error">{{ error }}</div>
-            <label for="name">Name</label>
-            <input v-model="name" id="name" class="form-control" type="text" placeholder="Name" required autofocus>
-            <label for="email" >Email</label>
-            <input v-model="email" id="email" class="form-control" type="text" placeholder="Email" required autofocus>
-            <label for="password">Password</label>
-            <input v-model="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-            <label for="password-confirm">Confirm Password</label>
-            <input v-model="password" type="password" id="inputPasswordConfirm" class="form-control" placeholder="Confirm Password" required>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
-            <router-link to="/login">Cancel</router-link>
+            <h2 class="title is-size-2">Register</h2>
+            <div class="notification is-danger" @loginError="error" v-if="error">{{ error }}</div>
+            <label class="label" for="name">Name</label>
+            <input v-model="name" id="name" class="input" type="text" placeholder="Name" required autofocus>
+            <label class="label" for="email" >Email</label>
+            <input v-model="email" id="email" class="input" type="text" placeholder="Email" required autofocus>
+            <label class="label" for="password">Password</label>
+            <input v-model="password" type="password" id="inputPassword" class="input" placeholder="Enter a password -- min. 6 characters" required>
+            <label class="label" for="password-confirm">Confirm Password</label>
+            <input v-model="password_confirmation" type="password" id="inputPasswordConfirm" class="input" placeholder="Confirm Password" required>
+            <button class="button is-rounded is-primary" type="submit">Register</button>
+            <router-link to="/login" class="button is-rounded is-danger">Go Back</router-link>
               
             
           </form>
@@ -55,7 +55,11 @@
               password: this.password,
               
             };
-            register(data);
+            if(this.password === this.password_confirmation) {
+              register(data);
+            } else {
+              alert("Please check your password");
+            }
           }
         }
       };
