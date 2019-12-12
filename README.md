@@ -4,9 +4,69 @@ Users can also search the official Path of Exile database for leagues, accounts 
 
 Authors: Petri Forsman & Anton Wiskari
 
+## Project overview
+
+The stack used for this project is as follows:
+
+Backend:
+```
+Database: Mondodb -- mongoose for node
+
+Back-end: Node Express.js
+
+Dependencies:
+
+    bcryptjs
+    body-parser 
+    concurrently -- for running both ends with one script
+    config
+    cors
+    dotenv
+    express 
+    express-validator
+    jsonwebtoken
+    jwt-decode
+    moment -- date & time logging / formatting
+    mongoose 
+    morgan -- dev tool for logging api calls
+    node-fetch
+    vue-axios
+    vuex
+
+devDependencies:
+
+    nodemon -- for automatic server refreshing after changes
+```
+
+Front:
+```
+Vue.js
+
+Bulma CSS framework for styling
+
+Dependencies:
+
+    axios
+    core-js
+    moment
+    vue
+    vue-router
+    vuex
+  
+devDependencies:
+
+    @vue/cli-plugin-babel
+    @vue/cli-plugin-eslint
+    @vue/cli-service
+    babel-eslint
+    eslint
+    eslint-plugin-vue
+    vue-template-compiler
+```
+
 ## Project setup
 
-Be sure to run the setup script both in root and in client folder to install all dependencies
+The node_modules/ folder is excluded from version control. Be sure to run the setup script both in root and in client folder to install all dependencies
 ```
 npm install
 
@@ -21,7 +81,11 @@ cd ..
 ```
 npm run dev
 ```
-
+or separately
+```
+npm run server
+npm run client
+```
 # REST API Docs
 
 ## Overview
