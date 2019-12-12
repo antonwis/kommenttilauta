@@ -71,12 +71,13 @@ export function login (info) {
         return new Promise((resolve, reject) => {
                   store.commit('logout')
                   localStorage.removeItem('token')
-                  
+                  location.reload();
                   resolve()
         })
 }
 export function loginSuccessful (res) {
         console.log(res.data);
+        
         if (!res.data.token) {
           loginFailed()
           return
